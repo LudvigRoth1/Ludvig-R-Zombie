@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rögle</title>
+</head>
+<body>
+    <script src="http://koda.nu/simple.js">
+    
+        var zombies = [];
+        var playerX = 100
+        var playerY = 100
+
+        var i = 0;
+
+        while (i<100)
+        {
+            zombies.push({x:random(totalWidth), y:random(totalHeight), speed: random(1,5)});
+           
+            i += 1;
+        }
+        
+    var zombie = {x:random(totalWidth), y:random(totalHeight), speed: random(1,5)};
+
+    function update()
+    {
+        clearScreen();
+
+        var i = 0;
+        while (i<15)
+        {
+            var zombie = zombies[i];
+        
+
+         picture (zombie.x, zombie.y, "https://spelprogrammering.nu/bilder/zombie.png")
+         if (zombie.x < playerX)
+         zombie.x += zombie.speed;
+         else 
+          zombie.x -= zombie.speed
+         if (zombie.y < playerY)
+          zombie.y += zombie.speed;
+         else 
+          zombie.y -= zombie.speed
+        
+         if (distance(playerX,playerY, zombie.x, zombie.y) < 5)
+         {
+            alert("Du suger hårt");
+            stopUpdate();
+         }
+         i += 1;
+        }
+        picture(playerX, playerY, "https://spelprogrammering.nu/bilder/zombie.png", "blue")
+
+        if (keyboard.d)
+           playerX += 40;
+       if (keyboard.a)
+           playerX -= 40;
+       if (keyboard.w)
+           playerY -= 40;
+       if (keyboard.s)
+           playerY += 40;
+
+    }
+
+    </script>
+</body>
+</html>
