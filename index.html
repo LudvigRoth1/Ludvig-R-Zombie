@@ -13,28 +13,43 @@
         var playerX = 100
         var playerY = 100
 
+        let beat = new Audio('lose.mp3');
+        let theme = new Audio('themeSong.mp3');
+
         var i = 0;
 
         while (i<100)
         {
-            zombies.push({x:random(totalWidth), y:random(totalHeight), speed: random(1,5)});
+            zombies.push({x:random(totalWidth), y:random(totalHeight), speed: random(1,5), health : 100, damage: random(1, 10)});
            
             i += 1;
         }
         
     var zombie = {x:random(totalWidth), y:random(totalHeight), speed: random(1,5)};
+    document.body.style.backgroundRepeat = "repeat-y";
+    document.body.style.backgroundImage = "url('backround.jpeg')" ;
+
+    var timer = 10;
 
     function update()
     {
+        theme.play();
         clearScreen();
-
+        timer--;
         var i = 0;
-        while (i<15)
+        while (i<10)
         {
             var zombie = zombies[i];
-        
+        if(timer === 0){
+            timer = 10;
+            zombies.health -= zombies.damage;
+        }
+        if(zombie.health <= 0){
+            zombies.splice[i];
+        }
 
-         picture (zombie.x, zombie.y, "https://spelprogrammering.nu/bilder/zombie.png")
+         picture (zombie.x, zombie.y, "Banana.png")
+         rectangle(zombie.x, zombie.y-15, 100*(zombie.health/100), 5, "red")
          if (zombie.x < playerX)
          zombie.x += zombie.speed;
          else 
@@ -46,12 +61,14 @@
         
          if (distance(playerX,playerY, zombie.x, zombie.y) < 5)
          {
-            alert("Du suger hårt");
+            beat.play();
+            theme.pause();
+            alert("Bra jobbat   ");
             stopUpdate();
          }
          i += 1;
         }
-        picture(playerX, playerY, "https://spelprogrammering.nu/bilder/zombie.png", "blue")
+        picture(playerX, playerY, "Minion_Stuart.avif", "blue")
 
         if (keyboard.d)
            playerX += 40;
