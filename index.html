@@ -8,13 +8,18 @@
 </head>
 <body>
     <script src="http://koda.nu/simple.js">
-    
+
+
+        console.log(mouse.x)
+        console.log(mouse.y)
         var zombies = [];
         var playerX = 100
         var playerY = 100
+        // variabler och musens kordinater.
 
         let beat = new Audio('lose.mp3');
         let theme = new Audio('themeSong.mp3');
+        // variabler och filer för ljud
 
         var i = 0;
 
@@ -26,13 +31,30 @@
         }
         
     var zombie = {x:random(totalWidth), y:random(totalHeight), speed: random(1,5)};
+    // lista för zombies för att välja hur många som ska skapas och hastighet samt vart de ska spawnas
+
+
+
     document.body.style.backgroundRepeat = "repeat-y";
     document.body.style.backgroundImage = "url('backround.jpeg')" ;
+    // tar bort upprepning i bakrunden
+
+
+    
+    function myFunction() {
+    setInterval(setAlert, 5000);
+    }
+    function setAlert() {
+    alert("Grattis du vann!");
+    }
+    // timer och medelande när man dör, timer funkar inte.
 
     var timer = 10;
+    // timer för tid när man ska vinna, funkar inte tyvär
 
     function update()
     {
+        hideMouse();
         theme.play();
         clearScreen();
         timer--;
@@ -47,19 +69,21 @@
         if(zombie.health <= 0){
             zombies.splice[i];
         }
+        // damedge, tid för att ta skada och gömma musen.
 
          picture (zombie.x, zombie.y, "Banana.png")
          rectangle(zombie.x, zombie.y-15, 100*(zombie.health/100), 5, "red")
-         if (zombie.x < playerX)
+         if (zombie.x < mouse.x)
          zombie.x += zombie.speed;
          else 
           zombie.x -= zombie.speed
-         if (zombie.y < playerY)
+         if (zombie.y < mouse.y)
           zombie.y += zombie.speed;
          else 
           zombie.y -= zombie.speed
+          // Hur zombiesarna ska röra sig mot musen samt hur mycket skada alla zombies ska göra
         
-         if (distance(playerX,playerY, zombie.x, zombie.y) < 5)
+         if (distance(playerX,playerY, zombie.x, zombie.y) < 100)
          {
             beat.play();
             theme.pause();
@@ -67,19 +91,23 @@
             stopUpdate();
          }
          i += 1;
-        }
+        } // När spelet är över och vad som ska hända efter spelet är slut
+
+        
+        picture(mouse.x, mouse.y,"kingbanana_7.png" )
         picture(playerX, playerY, "Minion_Stuart.avif", "blue")
+        // bilder på mus och spelare
 
         if (keyboard.d)
-           playerX += 40;
+           playerX += 15;
        if (keyboard.a)
-           playerX -= 40;
+           playerX -= 15;
        if (keyboard.w)
-           playerY -= 40;
+           playerY -= 15;
        if (keyboard.s)
-           playerY += 40;
+           playerY += 15;
 
-    }
+    } // styra spelaren med WASD
 
     </script>
 </body>
